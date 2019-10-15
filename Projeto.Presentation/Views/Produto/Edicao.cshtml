@@ -1,0 +1,60 @@
+﻿@model Projeto.Presentation.Models.ProdutoEdicaoModel
+@{
+    ViewData["Title"] = "Edicao";
+    Layout = "~/Views/Templates/Layout.cshtml";
+}
+
+<!-- utilizar a model de consulta -->
+<!-- precisa editar uma model (ProdutoEdicaooModel) para interagir com a página-->
+<h4>Atualização de Produto</h4>
+<hr />
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-6">
+
+            <!-- Campo oculto adicionado para o id do produto -->
+            @Html.HiddenFor(model => model.IdProduto)
+
+
+            <label>Nome do Produto:</label>
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+
+            <!-- span para mostrar os erros de validação do campo nome -->
+            <span class="text-danger">
+                @Html.ValidationMessageFor(model => model.Nome)
+            </span>
+            <br />
+
+            <label>Preço:</label>
+            @Html.TextBoxFor(model => model.Preco, new { @class = "form-control" })
+
+            <!-- span para mostrar os erros de validação do campo preco -->
+            <span class="text-danger">
+                @Html.ValidationMessageFor(model => model.Preco)
+            </span>
+            <br />
+
+            <label>Quantidade:</label>
+            @Html.TextBoxFor(model => model.Quantidade, new { @class = "form-control" })
+
+            <!-- span para mostrar os erros de validação do campo quantidade -->
+            <span class="text-danger">
+                @Html.ValidationMessageFor(model => model.Quantidade)
+            </span>
+            <br />
+
+            <!-- botão para o submit -->
+            <input type="submit" value="Atualizar Produto"
+                   class="btn btn-primary" />
+            <br />
+            <br />
+            <!-- Mostra a mensagem de erro -->
+            <strong>@TempData["Mensagem"]</strong>
+
+        </div>
+    </div>
+}
+
+

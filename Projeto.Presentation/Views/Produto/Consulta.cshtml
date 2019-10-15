@@ -1,0 +1,59 @@
+﻿@model List<Projeto.Presentation.Models.ProdutoConsultaModel>
+<!-- List = porque recebe a lista de models do ProdutoConsultaModel-->
+@{
+    ViewData["Title"] = "Consulta";
+    Layout = "~/Views/Templates/Layout.cshtml";
+}
+
+<h4>Consulta de Produtos</h4>
+<hr />
+
+<div>
+    <!-- Exibe as mensagens  -->
+    <strong>@TempData["Mensagem"]</strong>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <td align="center">Código</td>
+            <td align="center">Nome do Produto</td>
+            <td width="140" align="center">Preço</td>
+            <td align="center">Quantidade</td>
+            <td align="center" width="140">Total</td>
+            <td align="center">Data de Cadastro</td>
+            <td align="center" width="180">Operações</td>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Model com M maiusculo é palavra reservada para utilizar os dados da Model da lista-->
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdProduto</td>
+                <td>@item.Nome</td>
+                <td>@item.Preco.ToString("c")</td>
+                <td>@item.Quantidade</td>
+                <td>@item.Total.ToString("c")</td>
+                <td>@item.DataCadastro.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <!-- precisa passar o id do produto para Alterar ou Excluir-->
+                    <a href="/Produto/Edicao/@item.IdProduto"
+                       class="bnt btn-primary btn-sm">
+                        Atualizar
+                    </a>
+                    <a href="/Produto/Exclusao/@item.IdProduto" class="bnt btn-danger btn-sm">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">Quantidade de registros: @Model.Count</td>
+        </tr>
+    </tfoot>
+</table>
+
+
